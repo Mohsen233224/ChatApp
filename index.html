@@ -1,41 +1,78 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دردشة محسن</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Gemini Voice Bot - محسن</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      margin-top: 20px;
+      background: #00c853;
+      border: none;
+      border-radius: 10px;
+      color: white;
+    }
+    #response {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="chat-container">
-    <ul id="messages"></ul>
-    <form id="form">
-      <input id="input" autocomplete="off" placeholder="اكتب رسالتك..." />
-      <button>إرسال</button>
-    </form>
-  </div>
 
-  <script src="/socket.io/socket.io.js"></script>
+  <h2>🤖 Gemini AI - صوتياً</h2>
+  <button onclick="startListening()">🎤 اضغط وتحدث</button>
+  <div id="response">جاهز للاستماع...</div>
+
   <script>
-    const socket = io();
-    const form = document.getElementById("form");
-    const input = document.getElementById("input");
-    const messages = document.getElementById("messages");
+    async function startListening() {
+      const responseDiv = document.getElementById("response");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      if (input.value) {
-        socket.emit("chat message", input.value);
-        input.value = "";
+      if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+        alert("جهازك لا يدعم التعرف على الصوت.");
+        return;
       }
-    });
 
-    socket.on("chat message", function(msg) {
-      const item = document.createElement("li");
-      item.textContent = msg;
-      messages.appendChild(item);
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'ar-SA';
+      recognition.start();
+
+      responseDiv.textContent = "🎤 جاري الاستماع...";
+
+      recognition.onresult = async function(event) {
+        const userText = event.results[0][0].transcript;
+        responseDiv.innerHTML = `🗣️ أنت: ${userText}<br>🤖 جاري الرد...`;
+
+        try {
+          const res = await fetch("https://YOUR-SERVER-URL/api/gemini", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: userText }),
+          });
+
+          const data = await res.json();
+          const reply = data?.candidates?.[0]?.output || "❌ لا يوجد رد.";
+          responseDiv.innerHTML = `🗣️ أنت: ${userText}<br>🤖 الرد: ${reply}`;
+        } catch (e) {
+          responseDiv.textContent = "❌ خطأ في الاتصال.";
+        }
+      };
+
+      recognition.onerror = function() {
+        responseDiv.textContent = "❌ حدث خطأ أثناء الاستماع.";
+      };
+    }
   </script>
+
 </body>
 </html>
