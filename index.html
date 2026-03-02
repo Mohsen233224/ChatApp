@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ط">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Muasasat Alnajwa</title>
+<title>World Monitor</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="author" content="Mohsen">
+<meta name="copyright" content="World Monitor 2026">
 
 <style>
-
+/* ================= BASE ================= */
 *{
 margin:0;
 padding:0;
@@ -21,886 +21,405 @@ font-family:'Cairo',sans-serif;
 }
 
 body{
-background:#fff;
-max-width:430px;
+background:#070b14;
+color:white;
+overflow-x:hidden;
+}
+
+/* خلفية متحركة */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#00ffd522,transparent 40%),
+radial-gradient(circle,#4facfe22,transparent 40%);
+animation:bg 18s linear infinite;
+z-index:-1;
+}
+@keyframes bg{
+50%{transform:translate(-10%,-10%)}
+}
+
+/* ================= NAV ================= */
+nav{
+position:fixed;
+width:100%;
+top:0;
+padding:15px 40px;
+background:rgba(0,0,0,.4);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+z-index:999;
+}
+
+.logo{
+color:#00ffd5;
+font-weight:900;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-right:20px;
+opacity:.8;
+cursor:pointer;
+}
+
+nav a:hover{
+color:#00ffd5;
+}
+
+/* ================= HERO ================= */
+.hero{
+padding:140px 20px 60px;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+background:linear-gradient(90deg,#00ffd5,#4facfe);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero p{
+opacity:.8;
+margin-top:15px;
+line-height:1.9;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 30px;
+border-radius:40px;
+background:linear-gradient(90deg,#00ffd5,#4facfe);
+color:#000;
+font-weight:bold;
+text-decoration:none;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px #00ffd5aa;
+}
+
+/* ================= CARDS ================= */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+max-width:1000px;
 margin:auto;
 }
 
-/* top */
-
-.top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:15px;
-
-font-size:22px;
-
-}
-
-.top .left,
-.top .right{
-
-display:flex;
-
-gap:20px;
-
-}
-
-.icon{
-
-cursor:pointer;
-
-}
-
-/* profile */
-
-.profile{
-
+.card{
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:18px;
 text-align:center;
-
-padding:10px;
-
+transition:.4s;
 }
 
-.profile img{
-
-width:110px;
-height:110px;
-
-border-radius:50%;
-
-border:2px solid #ddd;
-
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 35px #00ffd533;
 }
 
-/* name */
-
-.name{
-
-font-size:22px;
-
+.number{
+font-size:34px;
 font-weight:900;
-
+color:#00ffd5;
 margin-top:10px;
-
 }
 
-.username{
-
-color:gray;
-
-font-size:15px;
-
-margin-top:3px;
-
-}
-
-/* stats */
-
-.stats{
-
-display:flex;
-
-justify-content:space-around;
-
-margin-top:15px;
-
-}
-
-.stat{
-
+/* ================= FOOTER ================= */
+footer{
+background:#05070f;
+margin-top:80px;
+padding:40px 20px;
 text-align:center;
-
+border-top:1px solid rgba(255,255,255,.08);
 }
 
-.stat b{
-
-font-size:18px;
-
-}
-
-.stat span{
-
-display:block;
-
-color:gray;
-
-font-size:13px;
-
-}
-
-/* buttons row */
-
-.buttons{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-padding:15px;
-
-}
-
-.follow{
-
-flex:1;
-
-background:#ff2c55;
-
+footer a{
 color:white;
-
-border:none;
-
-padding:12px;
-
-border-radius:50px;
-
-font-weight:bold;
-
-font-size:16px;
-
+margin:0 10px;
 cursor:pointer;
-
-}
-
-
-
-.arrow{
-
-width:45px;
-
-height:45px;
-
-background:#eee;
-
-border-radius:50%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-}
-
-/* bio */
-
-.bio{
-
-text-align:center;
-
-padding:10px;
-
-font-size:15px;
-
-line-height:1.7;
-
-}
-
-.bio a{
-
-color:black;
-
-font-weight:bold;
-
+opacity:.7;
 text-decoration:none;
-
-display:block;
-
-margin-top:5px;
-
 }
 
-.phone{
-
-color:#FF2C55;
-
-margin-top:8px;
-
-font-weight:bold;
-
-cursor:pointer;
-
+footer a:hover{
+color:#00ffd5;
 }
 
-/* tabs */
-
-.tabs{
-
-display:flex;
-
-justify-content:center;
-
-gap:40px;
-
-border-bottom:1px solid #ddd;
-
-padding-bottom:8px;
-
-margin-top:10px;
-
+.copy{
+margin-top:20px;
+opacity:.6;
+font-size:14px;
 }
 
-.tab{
-
-font-size:22px;
-
-cursor:pointer;
-
-}
-
-.active{
-
-border-bottom:3px solid black;
-
-padding-bottom:8px;
-
-}
-
-/* grid */
-
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:2px;
-
-margin-top:2px;
-
-}
-
-.video{
-
-height:140px;
-
-background:black;
-
-position:relative;
-
-cursor:pointer;
-
-}
-
-.video img{
-
+/* ================= MODAL ================= */
+.modal{
+position:fixed;
+top:0;
+left:0;
 width:100%;
-
 height:100%;
-
-object-fit:cover;
-
-}
-
-.views{
-
-position:absolute;
-
-bottom:5px;
-
-left:5px;
-
-color:white;
-
-font-size:13px;
-
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(10px);
 display:flex;
-
+justify-content:center;
 align-items:center;
-
-gap:3px;
-
+opacity:0;
+pointer-events:none;
+transition:.4s;
+z-index:2000;
 }
-/* واجهة التنبيهات شاشة كاملة */
-#notificationBoxFull {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  z-index: 9999;
+
+.modal.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.modal-box{
+background:#0b1224;
+padding:35px;
+border-radius:18px;
+max-width:600px;
+width:90%;
+box-shadow:0 0 40px #00ffd544;
+position:relative;
+animation:pop .4s;
+}
+
+.modal-box h2{
+color:#00ffd5;
+margin-bottom:15px;
+}
+
+.modal-box p{
+line-height:2;
+opacity:.85;
+}
+
+/* ===== CONTACT FORM ===== */
+.contact-form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
 }
 
-/* هيدر */
-#notificationHeaderFull {
-  background: #ff2c55;
+.contact-form input,
+.contact-form textarea {
+  background: #070b14;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 10px;
+  padding: 12px;
   color: white;
-  padding: 15px;
+  font-size: 14px;
+  outline: none;
+  transition: .3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00ffd5;
+  box-shadow: 0 0 10px #00ffd544;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+.contact-form button {
+  background: linear-gradient(90deg, #00ffd5, #4facfe);
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
   font-weight: bold;
-  text-align: center;
-  position: relative;
-  font-size: 18px;
-}
-
-/* زر الإغلاق */
-#notificationHeaderFull span {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
   cursor: pointer;
-  font-size: 22px;
+  transition: .3s;
 }
 
-/* محتوى التنبيهات */
-#notificationBoxFull {
-  display: none;  /* ← مهم جدًا: خليها مخفية في البداية */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  z-index: 9999;
-  flex-direction: column;
+.contact-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffd5aa;
 }
 
-.Cover-ring {
-  position: fixed;      /* يبقيها مثبتة أسفل الصفحة */
-  bottom: 0;            /* أسفل الصفحة */
-  left: 0;
-  width: 100%;          /* تمتد بعرض الشاشة */
-  background: #f2f2f2;  /* لون خلفية خفيف */
-  color: #333;          /* لون النص */
-  text-align: center;   /* النص في الوسط */
-  font-weight: bold;    /* نص عريض */
-  padding: 10px 0;      /* مسافة داخلية */
-  border-top: 1px solid #ddd; /* خط فاصل من الأعلى */
-  font-family: 'Cairo', sans-serif; /* خط مشابه لباقي الصفحة */
-  box-sizing: border-box;
-  z-index: 1000;        /* للتأكد أنه فوق باقي العناصر */
-}
-
-
-/* زر الفتح */
-#openChatBtn{
-  flex:1;
-
-background:#eee;
-
+.modal-close{
+position:absolute;
+top:10px;
+left:12px;
+background:none;
 border:none;
-
-padding:12px;
-
-border-radius:50px;
-
-font-weight:bold;
-
-font-size:16px;
-
+color:white;
+font-size:22px;
 cursor:pointer;
 }
 
-/* واجهة الدردشة */
-#chatBoxFull{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:100%;
-  height:100%;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  transition:0.4s ease;
-  z-index:9999;
+.modal-close:hover{
+color:#00ffd5;
 }
 
-/* عند التفعيل */
-#chatBoxFull.active{
-  right:0;
-}
-
-/* الهيدر */
-#chatHeader{
-  background:linear-gradient(135deg,#ff2c55,#ff6b81);
-  color:white;
-  padding:12px 15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  direction:rtl;
-}
-
-.chatUser{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.chatUser img{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid white;
-}
-
-.closeChat{
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* الرسائل */
-#chatMessages{
-  flex:1;
-  padding:15px;
-  overflow-y:auto;
-  background:#f9f9f9;
-}
-.Motr-imges{
-background:#f9f9f9;
-}
-/* الإدخال */
-#chatInputArea{
-  display:flex;
-  gap:10px;
-  padding:10px;
-  border-top:1px solid #eee;
-}
-
-#chatInputArea input{
-  flex:1;
-  padding:12px;
-  border-radius:25px;
-  border:1px solid #ddd;
-  outline:none;
-}
-
-#chatInputArea button{
-  padding:10px 20px;
-  border:none;
-  border-radius:25px;
-  background:#FF2C55;
-  color:white;
-  cursor:pointer;
+@keyframes pop{
+from{transform:scale(.8);opacity:0}
+to{transform:scale(1)}
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- top -->
-
-<div class="top">
-
-<div class="left">
-
-<i class="fa-solid fa-share" style="font-size:22px; cursor:pointer;" onclick="sharePage()"></i>
-
-<!-- أيقونة الجرس -->
-<i class="fa-regular fa-bell" style="font-size:22px; cursor:pointer;" onclick="openNotifications()"></i>
-
-<!-- نافذة التنبيهات -->
-<div id="notificationBoxFull">
-  <div id="notificationHeaderFull">
-    التنبيهات
-    <span onclick="closeNotificationsFull()">✖</span>
-  </div>
-  <div id="notificationListFull">
-    لا يوجد تنبيهات حالياً
-  </div>
+<!-- NAV -->
+<nav>
+<div class="logo">🌍 World Monitor</div>
+<div>
+<a onclick="openModal('privacy')">سياسة الخصوصية</a>
+<a onclick="openModal('terms')">شروط الاستخدام</a>
+<a onclick="openModal('contact')">اتصل بنا</a>
 </div>
+</nav>
 
-</div>
+<!-- HERO -->
+<section class="hero">
+<h1>مراقبة العالم لحظة بلحظة</h1>
+<p>
+منصة تعرض الإحصائيات العالمية مباشرة بتجربة بصرية حديثة.
+</p>
 
-<div class="right">
-
-<i class="fa-solid fa-arrow-left" onclick="window.open('https://www.tiktok.com/@.muasasat.alnajwa/photo/7601423068635893010?_r=1&_t=ZS-947Sw2LsiQi','_blank');"></i>
-
-</div>
-
-</div>
-
-<!-- profile -->
-
-<div class="profile">
-
-<img src="https://image2url.com/r2/default/images/1771695480519-a41503ad-7b64-43f6-b64c-fab9120c0596.jpg">
-
-<div class="name">
-
-Muasasat Alnajwa/مؤسسة النجوى
-
-</div>
-
-<div class="username">
-
-@.muasasat.alnajwa
-
-</div>
-
-</div>
-
-<!-- stats -->
-
-<div class="stats">
-
-<div class="stat">
-
-<b>75.8 ألف</b>
-
-<span>تسجيلات الإعجاب</span>
-
-</div>
-
-<div class="stat">
-
-<b>12.3 ألف</b>
-
-<span>متابعين</span>
-
-</div>
-
-<div class="stat">
-
-<b>258</b>
-
-<span>أتابعه</span>
-
-</div>
-
-</div>
-
-<!-- buttons -->
-
-<div class="buttons">
-
-<div class="arrow">
-
-<i class="fa-solid fa-chevron-down"></i>
-
-</div>
-
-
-<div class="Cover-ring">
-  <b>جميع الحقوق محفوظة لدى محسن © 2026</b>
-</div>
-<!-- زر المراسلة -->
-
-
-
-
-<button id="openChatBtn">مراسلة</button>
-<button class="follow" id="followBtn" onclick="follow()">
-متابعة
-</button>
-<!-- زر المراسلة -->
-
-<!-- واجهة الدردشة -->
-<div id="chatBoxFull">
-
-  <!-- Header -->
-  <div id="chatHeader">
-    <div class="chatUser">
-      <img src="https://image2url.com/r2/default/images/1771695480519-a41503ad-7b64-43f6-b64c-fab9120c0596.jpg" مؤسسة النجوى>
-      <span>مؤسسة النجوى</span>
-    </div>
-
-    <span class="closeChat">✕</span>
-  </div>
-<img class="Motr-imges"  src="Motr.png" alt="توضيح">
-  <!-- الرسائل -->
-  <div id="chatMessages"></div>
-
-  <!-- الإدخال -->
-  <div id="chatInputArea">
-    <input type="text" id="chatInput" placeholder="اكتب رسالة...">
-    <button id="sendBtn">إرسال</button>
-  </div>
-</div>
-
-<script>
-
-// فتح الدردشة
-document.getElementById("openChatBtn").onclick = function(){
-  document.getElementById("chatBoxFull").classList.add("active");
-};
-
-// إغلاق الدردشة
-document.querySelector(".closeChat").onclick = function(){
-  document.getElementById("chatBoxFull").classList.remove("active");
-};
-
-// إرسال رسالة
-document.getElementById("sendBtn").onclick = sendMessage;
-document.getElementById("chatInput").addEventListener("keypress",function(e){
-  if(e.key==="Enter"){ sendMessage(); }
-});
-
-function sendMessage(){
-  let input = document.getElementById("chatInput");
-  if(input.value.trim() === "") return;
-
-  // رسالة المستخدم
-  let userMsg = document.createElement("div");
-  userMsg.textContent = input.value;
-  userMsg.style.background="#ff2c55";
-  userMsg.style.color="white";
-  userMsg.style.padding="8px 12px";
-  userMsg.style.borderRadius="15px";
-  userMsg.style.marginBottom="10px";
-  userMsg.style.maxWidth="70%";
-  userMsg.style.alignSelf="flex-end";
-
-  document.getElementById("chatMessages").appendChild(userMsg);
-  input.value="";
-
-  // رد تلقائي بعد 1 ثانية
-  setTimeout(function(){
-
-    let autoReply = document.createElement("div");
-    autoReply.style.background="#eee";
-    autoReply.style.color="#333";
-    autoReply.style.padding="10px 12px";
-    autoReply.style.borderRadius="15px";
-    autoReply.style.marginBottom="10px";
-    autoReply.style.maxWidth="80%";
-    autoReply.style.alignSelf="flex-start";
-
-    autoReply.innerHTML = `
-      شكراً لتواصلك مع مؤسسة النجوى 🙏<br><br>
-      يتم استقبال رسائلكم بشكل أسرع عبر الواتساب.<br>
-      سيتم الرد عليكم بأسرع وقت عند توفرنا.<br><br>
-    <a href="https://wa.me/966539575643" target="_blank"
-   style="display:inline-block;
-          margin-top:8px;
-          background:#25D366;
-          color:white;
-          padding:8px 15px;
-          border-radius:20px;
-          text-decoration:none;
-          font-size:14px;">
-   تواصل معنا عبر الواتساب
+<a class="btn" href="https://worldmonitor.app" target="_blank">
+زيارة الموقع الأصلي
 </a>
-    `;
+</section>
 
-    document.getElementById("chatMessages").appendChild(autoReply);
-
-    // تمرير لأسفل تلقائي
-    document.getElementById("chatMessages").scrollTop =
-      document.getElementById("chatMessages").scrollHeight;
-
-  }, 1000);
-}
-
-</script>
+<!-- STATS -->
+<section class="stats">
+<div class="card">
+<h3>عدد سكان العالم</h3>
+<div class="number" id="population">0</div>
 </div>
 
-<!-- bio -->
-
-<div class="bio">
-
-افضل مؤسسة رسمية لجميع المقاولات والعقارات والخدمات<br>
-
-بجميع دول الخليج
-
-<a href="https://wa.me/+966539575643">
-
-https://wa.me/+966539575643
-
-</a>
-
-<a href="https://www.tiktok.com/@.muasasat.alnajwa">
-
-tiktok.com/@.muasasat.alnajwa
-
-</a>
-
-<div class="phone">
-
-<i class="fa-solid fa-phone"></i>
-
-الهاتف
-
+<div class="card">
+<h3>المواليد اليوم</h3>
+<div class="number" id="births">0</div>
 </div>
 
+<div class="card">
+<h3>الوفيات اليوم</h3>
+<div class="number" id="deaths">0</div>
 </div>
 
-<!-- tabs -->
-
-<div class="tabs">
-
-<div class="tab active">
-
-<i class="fa-solid fa-grip"></i>
-
+<div class="card">
+<h3>استهلاك الطاقة</h3>
+<div class="number" id="energy">0</div>
 </div>
+</section>
 
-<div class="tab">
+<!-- FOOTER -->
+<footer>
+<a onclick="openModal('privacy')">سياسة الخصوصية</a>
+<a onclick="openModal('terms')">شروط الاستخدام</a>
+<a onclick="openModal('contact')">اتصل بنا</a>
 
-<i class="fa-solid fa-repeat"></i>
-
+<div class="copy">
+© 2026 World Monitor — Developed by <strong>Mohsen</strong>
 </div>
+</footer>
 
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-box">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 id="modalTitle"></h2>
+<div id="modalContent"></div>
 </div>
-
-<!-- videos -->
-
-<div class="grid">
-
-<div class="video" onclick="openVideo('video1.mp4')">
-
-<img src="https://image2url.com/r2/default/images/1771720746408-6246cdc1-c32f-4eba-9025-3961c294b950.jpg">
-
-<div class="views">
-
-<i class="fa-solid fa-play"></i>
-
-175
-
-</div>
-
-</div>
-
-<div class="video" onclick="openVideo('video2.mp4')">
-
-<img src="https://image2url.com/r2/default/images/1771720622282-59ca4e58-9254-451e-ad46-514b92575fbf.jpg">
-
-<div class="views">
-
-<i class="fa-solid fa-play"></i>
-
-170
-
-</div>
-
-</div>
-
-<div class="video" onclick="openVideo('video3.mp4')">
-
-
-
-<div class="views">
-
-<i class="fa-solid fa-play"></i>
-
-156
-
-</div>
-<div class="Cover-ring">
-  <b>جميع الحقوق محفوظة لدى محسن © 2026</b>
-</div>
-</div>
-
 </div>
 
 <script>
+/* ===== MODAL SYSTEM ===== */
+function openModal(type){
+const modal=document.getElementById("modal");
+const title=document.getElementById("modalTitle");
+const content=document.getElementById("modalContent");
 
-/* follow */
-
-function follow(){
-
-let btn=document.getElementById("followBtn");
-
-if(localStorage.follow=="yes"){
-
-localStorage.follow="no";
-
-btn.innerText="متابعة";
-
-btn.style.background="#ff2c55";
-
-}else{
-
-localStorage.follow="yes";
-
-btn.innerText="تمت المتابعة";
-
-btn.style.background="black";
-
+if(type==="privacy"){
+title.innerText="سياسة الخصوصية";
+content.innerHTML=`<p>
+نحترم خصوصية المستخدمين ولا نقوم بجمع أي بيانات شخصية بدون إذن.
+يستخدم الموقع البيانات لأغراض العرض الإحصائي فقط.
+</p>`;
 }
 
+if(type==="terms"){
+title.innerText="شروط الاستخدام";
+content.innerHTML=`<p>
+جميع محتويات موقع World Monitor محمية بحقوق النشر.
+يمنع النسخ أو إعادة الاستخدام التجاري دون إذن رسمي من مالك الموقع.
+</p>
+<p>© 2026 World Monitor — جميع الحقوق محفوظة.</p>`;
 }
 
-/* whatsapp */
-
-
-
-/* open video */
-
-function openVideo(v){
-
-localStorage.video=v;
-
-window.location="video.html";
-
+if(type==="contact"){
+title.innerText="اتصل بنا";
+content.innerHTML=`<form class="contact-form">
+<input type="text" placeholder="اسمك" />
+<input type="email" placeholder="بريدك الإلكتروني" />
+<textarea placeholder="رسالتك"></textarea>
+<button type="submit">إرسال</button>
+</form>
+<p>🌐 Website: worldmonitor.app</p>`;
 }
 
+modal.classList.add("active");
+}
+
+function closeModal(){
+document.getElementById("modal").classList.remove("active");
+}
+
+/* ===== API DATA REAL COUNTERS ===== */
+const API_KEY = "wda_sk_cnzhMoZSsjsGltaRbUJ1WFBfmurIMTfK2z_z-Kw5usv1cl_S8WKSw2LohlfmNVLPdKwcBGod51YZZK-TCyW1Ed4g2zxGqq6phm2JNbyLitA"; // ضع مفتاحك الجديد هنا
+
+async function loadWorldData(){
+try{
+const response = await fetch(`https://worlddataapi.com/api/v1/world/population?api_key=${API_KEY}`);
+const data = await response.json();
+
+document.getElementById("population").textContent =
+Number(data.population).toLocaleString();
+
+document.getElementById("births").textContent =
+Number(data.births_today || 0).toLocaleString();
+
+document.getElementById("deaths").textContent =
+Number(data.deaths_today || 0).toLocaleString();
+
+document.getElementById("energy").textContent =
+Number(data.energy_consumption || 0).toLocaleString();
+
+}catch(error){
+console.log("API ERROR:", error);
+}
+}
+
+// تحديث كل دقيقة
+loadWorldData();
+setInterval(loadWorldData,60000);
+
+/* توقيع المطور */
+console.log("%cWorld Monitor © 2026 | Developed by Mohsen",
+"color:#00ffd5;font-size:16px;font-weight:bold;"
+);
 </script>
-<script>
-  function sharePage() {
-    const shareData = {
-      title: "مؤسسة النجوى",
-      text: "شاهد هذا الملف الشخصي أو الفيديو!",
-      url: window.location.href // أو رابط الفيديو بدل الصفحة
-    };
-    
-    if (navigator.share) {
-      navigator.share(shareData)
-        .then(() => console.log("تمت المشاركة بنجاح"))
-        .catch((err) => console.error("حدث خطأ أثناء المشاركة:", err));
-    } else {
-      // fallback: نسخ الرابط إذا المتصفح لا يدعم Web Share API
-      navigator.clipboard.writeText(window.location.href)
-        .then(() => alert("تم نسخ الرابط"))
-        .catch(() => alert("لا يمكن نسخ الرابط"));
-    }
-  }
-  const notificationBoxFull = document.getElementById("notificationBoxFull");
 
-function openNotifications() {
-  notificationBoxFull.style.display = "flex"; // فقط عند الضغط
-  document.body.style.overflow = "hidden";
-}
-
-function closeNotificationsFull() {
-  notificationBoxFull.style.display = "none";
-  document.body.style.overflow = "auto";
-}
-
-</script>
-<script>
-  const chatBoxFull = document.getElementById("chatBoxFull");
-  const chatMessages = document.getElementById("chatMessages");
-  const chatInput = document.getElementById("chatInput");
-  
-  function openWhats() {
-    chatBoxFull.style.display = "flex"; // تظهر عند الضغط
-    document.body.style.overflow = "hidden"; // منع تمرير الصفحة خلف الدردشة
-  }
-  
-  function closeChat() {
-    chatBoxFull.style.display = "none"; // تختفي عند إغلاقها
-    document.body.style.overflow = "auto"; // استعادة تمرير الصفحة
-  }
-  
-  function sendMessage() {
-    const text = chatInput.value.trim();
-    if (text === "") return;
-    
-    const msg = document.createElement("div");
-    msg.className = "messageBubble sent";
-    msg.innerText = text;
-    chatMessages.appendChild(msg);
-    
-    chatInput.value = "";
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-</script>
 </body>
 </html>
