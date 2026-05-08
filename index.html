@@ -1,126 +1,869 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>World Monitor</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=0.65" />
+
+<title>BLUE WATER VIP ULTRA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
 <style>
-body { font-family:'Cairo',sans-serif; background:#070b14; color:white; margin:0; padding:0; }
-nav { padding:15px 20px; background:rgba(0,0,0,.4); backdrop-filter:blur(10px); display:flex; justify-content:space-between; position:fixed; width:100%; top:0; z-index:999; }
-nav a { color:white; margin-left:10px; text-decoration:none; cursor:pointer; opacity:.8; }
-nav a:hover{ color:#00ffd5; }
-.hero{ text-align:center; padding:120px 20px 60px; }
-.hero h1{ font-size:50px; background:linear-gradient(90deg,#00ffd5,#4facfe); -webkit-background-clip:text; color:transparent; }
-.hero p{ opacity:.8; margin-top:15px; line-height:1.8; }
-.btn{ display:inline-block; margin-top:25px; padding:14px 30px; border-radius:40px; background:linear-gradient(90deg,#00ffd5,#4facfe); color:#000; font-weight:bold; text-decoration:none; transition:.3s; }
-.btn:hover{ transform:scale(1.1); box-shadow:0 0 25px #00ffd5aa; }
-.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:20px; max-width:1000px; margin:160px auto 0; }
-.card{ background:rgba(255,255,255,.05); padding:25px; border-radius:18px; text-align:center; transition:.4s; }
-.card:hover{ transform:translateY(-8px); box-shadow:0 0 35px #00ffd533; }
-.number{ font-size:34px; font-weight:900; color:#00ffd5; margin-top:10px; }
-footer{ background:#05070f; margin-top:80px; padding:40px 20px; text-align:center; border-top:1px solid rgba(255,255,255,.08); }
-footer a{ color:white; margin:0 10px; cursor:pointer; opacity:.7; text-decoration:none; }
-footer a:hover{ color:#00ffd5; }
-.copy{ margin-top:20px; opacity:.6; font-size:14px; }
-/* MODAL */
-.modal{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.75); backdrop-filter:blur(10px); display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:.4s; z-index:2000; }
-.modal.active{ opacity:1; pointer-events:auto; }
-.modal-box{ background:#0b1224; padding:35px; border-radius:18px; max-width:600px; width:90%; box-shadow:0 0 40px #00ffd544; position:relative; animation:pop .4s; }
-.modal-box h2{ color:#00ffd5; margin-bottom:15px; }
-.modal-box p{ line-height:2; opacity:.85; }
-.contact-form { display:flex; flex-direction:column; gap:15px; margin-top:10px; }
-.contact-form input, .contact-form textarea{ background:#070b14; border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:12px; color:white; font-size:14px; outline:none; transition:.3s; }
-.contact-form input:focus, .contact-form textarea:focus{ border-color:#00ffd5; box-shadow:0 0 10px #00ffd544; }
-.contact-form textarea{ min-height:120px; resize:none; }
-.contact-form button{ background:linear-gradient(90deg,#00ffd5,#4facfe); border:none; padding:12px; border-radius:30px; font-weight:bold; cursor:pointer; transition:.3s; }
-.contact-form button:hover{ transform:scale(1.05); box-shadow:0 0 20px #00ffd5aa; }
-.modal-close{ position:absolute; top:10px; left:12px; background:none; border:none; color:white; font-size:22px; cursor:pointer; }
-.modal-close:hover{ color:#00ffd5; }
-@keyframes pop{ from{transform:scale(.8);opacity:0} to{transform:scale(1)} }
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#03111f,#071b31,#021526);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* الخلفية */
+
+.bg{
+position:fixed;
+inset:0;
+overflow:hidden;
+z-index:-1;
+}
+
+.bg span{
+position:absolute;
+bottom:-120px;
+border-radius:50%;
+background:rgba(0,183,255,.12);
+animation:float linear infinite;
+backdrop-filter:blur(10px);
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0) scale(0);
+opacity:0;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-130vh) scale(1.6);
+opacity:0;
+}
+
+}
+
+/* الهيدر */
+
+.header{
+position:sticky;
+top:0;
+z-index:999;
+
+padding:18px 24px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.logo{
+font-size:22px;
+font-weight:900;
+color:#38bdf8;
+}
+
+.vip{
+background:linear-gradient(45deg,#38bdf8,#0ea5e9);
+padding:8px 18px;
+border-radius:40px;
+font-size:13px;
+font-weight:bold;
+}
+
+/* الحاوية */
+
+.container{
+padding:20px;
+padding-bottom:120px;
+}
+
+/* الصفحات */
+
+.panel{
+display:none;
+animation:fade .4s;
+}
+
+.panel.active{
+display:block;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* الكروت */
+
+.hero{
+background:linear-gradient(
+135deg,
+rgba(56,189,248,.15),
+rgba(255,255,255,.03)
+);
+
+border:1px solid rgba(255,255,255,.08);
+
+padding:25px;
+
+border-radius:28px;
+
+backdrop-filter:blur(20px);
+
+margin-bottom:20px;
+}
+
+/* الإحصائيات */
+
+.stats-bar{
+margin-top:20px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.small-box{
+flex:1;
+min-width:100px;
+
+background:rgba(255,255,255,.05);
+
+padding:18px;
+
+border-radius:20px;
+
+text-align:center;
+}
+
+.small-box p{
+font-size:22px;
+font-weight:900;
+margin-top:8px;
+}
+
+/* الطلبات */
+
+.order{
+background:rgba(255,255,255,.05);
+
+padding:18px;
+
+border-radius:22px;
+
+margin-top:15px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:12px;
+}
+
+/* الإدخالات */
+
+input,
+select{
+width:100%;
+
+padding:15px;
+
+border:none;
+outline:none;
+
+background:rgba(255,255,255,.07);
+
+color:white;
+
+border-radius:16px;
+
+margin-top:12px;
+}
+
+/* الأزرار */
+
+button{
+width:100%;
+
+border:none;
+
+cursor:pointer;
+
+padding:15px;
+
+border-radius:18px;
+
+font-weight:900;
+
+margin-top:12px;
+
+background:linear-gradient(45deg,#00b4ff,#0077ff);
+
+color:white;
+
+font-size:15px;
+
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.02);
+}
+
+.done{
+background:linear-gradient(45deg,#16a34a,#22c55e);
+}
+
+.delete{
+background:linear-gradient(45deg,#dc2626,#ef4444);
+}
+
+/* الناف بار */
+
+.footer-nav{
+position:fixed;
+
+bottom:18px;
+left:50%;
+
+transform:translateX(-50%);
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(25px);
+
+padding:14px 18px;
+
+border-radius:28px;
+
+display:flex;
+
+gap:10px;
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+
+overflow:auto;
+max-width:95%;
+}
+
+.nav-btn{
+background:none;
+padding:10px 16px;
+border-radius:16px;
+color:white;
+width:auto;
+margin:0;
+}
+
+.nav-btn.active{
+background:rgba(56,189,248,.18);
+}
+
+/* الإعدادات */
+
+.setting{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.toggle{
+width:55px;
+height:30px;
+background:#334155;
+border-radius:30px;
+position:relative;
+cursor:pointer;
+}
+
+.circle{
+position:absolute;
+width:24px;
+height:24px;
+background:white;
+border-radius:50%;
+top:3px;
+right:4px;
+transition:.3s;
+}
+
+.toggle.active{
+background:#0ea5e9;
+}
+
+.toggle.active .circle{
+right:27px;
+}
+
+/* الوضع الفاتح */
+
+body.light{
+background:#f1f5f9;
+color:#111;
+}
+
+body.light .hero,
+body.light .order,
+body.light .header,
+body.light .footer-nav,
+body.light .small-box{
+background:rgba(255,255,255,.9);
+color:#111;
+}
+
+body.light input,
+body.light select{
+background:#e2e8f0;
+color:#111;
+}
+
+/* الجوال */
+
+@media(max-width:700px){
+
+.logo{
+font-size:16px;
+}
+
+.vip{
+font-size:11px;
+padding:6px 12px;
+}
+
+.hero{
+padding:20px;
+}
+
+}
+
 </style>
+
 </head>
+
 <body>
 
-<nav>
-<div>🌍 World Monitor</div>
-<div>
-<a onclick="openModal('privacy')">سياسة الخصوصية</a>
-<a onclick="openModal('terms')">شروط الاستخدام</a>
-<a onclick="openModal('contact')">اتصل بنا</a>
+<!-- الخلفية -->
+
+<div class="bg">
+
+<span style="left:10%;width:20px;height:20px;animation-duration:14s"></span>
+
+<span style="left:50%;width:35px;height:35px;animation-duration:18s"></span>
+
 </div>
-</nav>
 
-<section class="hero">
-<h1>مراقبة العالم لحظة بلحظة</h1>
-<p>منصة تعرض الإحصائيات العالمية مباشرة بتجربة بصرية حديثة.</p>
-<a class="btn" href="https://worldmonitor.app" target="_blank">زيارة الموقع الأصلي</a>
-</section>
+<!-- الهيدر -->
 
-<section class="stats">
-<div class="card"><h3>عدد سكان العالم</h3><div class="number" id="population">0</div></div>
-<div class="card"><h3>المواليد اليوم</h3><div class="number" id="births">0</div></div>
-<div class="card"><h3>الوفيات اليوم</h3><div class="number" id="deaths">0</div></div>
-<div class="card"><h3>استهلاك الطاقة</h3><div class="number" id="energy">0</div></div>
-</section>
+<header class="header">
 
-<footer>
-<a onclick="openModal('privacy')">سياسة الخصوصية</a>
-<a onclick="openModal('terms')">شروط الاستخدام</a>
-<a onclick="openModal('contact')">اتصل بنا</a>
-<div class="copy">© 2026 World Monitor — Developed by <strong>Mohsen</strong></div>
-</footer>
-
-<div id="modal" class="modal">
-<div class="modal-box">
-<button class="modal-close" onclick="closeModal()">✕</button>
-<h2 id="modalTitle"></h2>
-<div id="modalContent"></div>
+<div class="logo">
+💧 BLUE WATER VIP ULTRA
 </div>
+
+<div class="vip">
+VIP SYSTEM
+</div>
+
+</header>
+
+<!-- المحتوى -->
+
+<div class="container">
+
+<!-- الرئيسية -->
+
+<div id="home" class="panel active">
+
+<div class="hero">
+
+<h1>نظام إدارة المياه</h1>
+
+<p style="margin-top:10px;opacity:.8;">
+إدارة الطلبات والعملاء والأرباح بطريقة احترافية
+</p>
+
+<div class="stats-bar">
+
+<div class="small-box">
+📦
+<p id="ordersCount">0</p>
+<span>الطلبات</span>
+</div>
+
+<div class="small-box">
+💰
+<p id="profits">0</p>
+<span>الأرباح</span>
+</div>
+
+<div class="small-box">
+👥
+<p id="clients">0</p>
+<span>العملاء</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- إضافة طلب -->
+
+<div class="hero">
+
+<h2 style="color:#7dd3fc;margin-bottom:10px;">
+➕ إضافة طلب جديد
+</h2>
+
+<input id="name" placeholder="اسم العميل">
+
+<input id="phone" placeholder="رقم الجوال">
+
+<input id="location" placeholder="الموقع">
+
+<input id="gallons" placeholder="عدد الجالونات">
+
+<input id="price" placeholder="السعر">
+
+<select id="payment">
+<option>كاش</option>
+<option>تحويل</option>
+</select>
+
+<button onclick="addOrder()">
+إضافة الطلب
+</button>
+
+</div>
+
+</div>
+
+<!-- الطلبات -->
+
+<div id="orders" class="panel">
+
+<div class="hero">
+
+<h2>📦 الطلبات</h2>
+
+<div id="ordersList"></div>
+
+</div>
+
+</div>
+
+<!-- العملاء -->
+
+<div id="clientsPage" class="panel">
+
+<div class="hero">
+
+<h2>👥 العملاء</h2>
+
+<div id="clientsList"></div>
+
+</div>
+
+</div>
+
+<!-- الأرباح -->
+
+<div id="profitsPage" class="panel">
+
+<div class="hero">
+
+<h2>💰 الأرباح</h2>
+
+<p id="profitsBig"></p>
+
+</div>
+
+</div>
+
+<!-- الإعدادات -->
+
+<div id="settings" class="panel">
+
+<div class="hero">
+
+<h2>⚙️ الإعدادات</h2>
+
+<div class="setting">
+
+<span>🌙 الوضع الداكن</span>
+
+<div class="toggle active" id="darkToggle" onclick="toggleDark()">
+<div class="circle"></div>
+</div>
+
+</div>
+
+<div class="setting">
+<span>📱 الإصدار</span>
+<b>v3.0 VIP</b>
+</div>
+
+<div class="setting">
+<span>📅 تاريخ النشر</span>
+<b>2026/05/07</b>
+</div>
+
+<div class="setting">
+<span>🟢 حالة النظام</span>
+<b style="color:#22c55e;">متصل</b>
+</div>
+
+<div class="setting">
+<span>⚡ التوافق</span>
+<b>Android / IOS</b>
+</div>
+<div class="setting">
+  <span>📙الدليل الشامل لتطبيق</span>
+  <b><button onclick="opener()">
+ 🔍 الإطلاع الآن 
+</button></b>
+</div>
+<button onclick="clearData()">
+🗑️ حذف جميع البيانات
+</button>
+
+<button onclick="clearTemp()">
+🧹 حذف البيانات المؤقتة
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- الأزرار السفلية -->
+
+<div class="footer-nav">
+
+<button class="nav-btn active" onclick="show('home',this)">
+🏠 الرئيسية
+</button>
+
+<button class="nav-btn" onclick="show('orders',this)">
+📦 الطلبات
+</button>
+
+<button class="nav-btn" onclick="show('clientsPage',this)">
+👥 العملاء
+</button>
+
+<button class="nav-btn" onclick="show('profitsPage',this)">
+💰 الأرباح
+</button>
+
+<button class="nav-btn" onclick="show('settings',this)">
+⚙️ الإعدادات
+</button>
+
 </div>
 
 <script>
-/* MODAL */
-function openModal(type){
-const modal=document.getElementById("modal");
-const title=document.getElementById("modalTitle");
-const content=document.getElementById("modalContent");
 
-if(type==="privacy"){
-title.innerText="سياسة الخصوصية";
-content.innerHTML="<p>نحترم خصوصية المستخدمين ولا نجمع أي بيانات شخصية بدون إذن.</p>";
-} else if(type==="terms"){
-title.innerText="شروط الاستخدام";
-content.innerHTML="<p>جميع المحتويات محمية بحقوق النشر.</p><p>© 2026 World Monitor</p>";
-} else if(type==="contact"){
-title.innerText="اتصل بنا";
-content.innerHTML=`<form class="contact-form">
-<input type="text" placeholder="اسمك" required>
-<input type="email" placeholder="البريد الإلكتروني" required>
-<textarea placeholder="رسالتك" required></textarea>
-<button type="submit">إرسال</button>
-</form><p>🌐 Website: worldmonitor.app</p>`;
+let orders = JSON.parse(
+localStorage.getItem('vipOrders') || '[]'
+);
+
+/* حفظ */
+
+function save(){
+
+localStorage.setItem(
+'vipOrders',
+JSON.stringify(orders)
+);
+
 }
 
-modal.classList.add("active");
-}
-function closeModal(){ document.getElementById("modal").classList.remove("active"); }
+/* التنقل */
 
-/* API REAL COUNTERS */
-const API_KEY = "wda_sk_cnzhMoZSsjsGltaRbUJ1WFBfmurIMTfK2z_z-Kw5usv1cl_S8WKSw2LohlfmNVLPdKwcBGod51YZZK-TCyW1Ed4g2zxGqq6phm2JNbyLitA"; // مفتاحك
-async function loadWorldData(){
-try{
-const res = await fetch(`https://worlddataapi.com/api/v1/world/population?api_key=${API_KEY}`);
-const data = await res.json();
+function show(id,btn){
 
-document.getElementById("population").textContent = Number(data.population||0).toLocaleString();
-document.getElementById("births").textContent = Number(data.births_today||0).toLocaleString();
-document.getElementById("deaths").textContent = Number(data.deaths_today||0).toLocaleString();
-document.getElementById("energy").textContent = Number(data.energy_consumption||0).toLocaleString();
-}catch(err){ console.log("API ERROR:",err);}
+document.querySelectorAll('.panel')
+.forEach(p=>{
+p.classList.remove('active');
+});
+
+document.getElementById(id)
+.classList.add('active');
+
+document.querySelectorAll('.nav-btn')
+.forEach(b=>{
+b.classList.remove('active');
+});
+
+btn.classList.add('active');
+
+render();
+
 }
-loadWorldData();
-setInterval(loadWorldData,60000);
+
+/* إضافة طلب */
+function addOrder() {
+  
+  const customerName =
+    document.getElementById("name").value;
+  
+  const customerPhone =
+    document.getElementById("phone").value;
+  
+  const customerLocation =
+    document.getElementById("location").value;
+  
+  const customerGallons =
+    document.getElementById("gallons").value;
+  
+  const customerPrice =
+    document.getElementById("price").value;
+  
+  const customerPayment =
+    document.getElementById("payment").value;
+  
+  /* التحقق */
+  
+  if (
+    customerName.trim() === "" ||
+    customerPhone.trim() === "" ||
+    customerPrice.trim() === ""
+  ) {
+    
+    alert("أكمل البيانات");
+    
+    return;
+    
+  }
+  
+  /* إضافة الطلب */
+  
+  orders.unshift({
+    
+    name: customerName,
+    
+    phone: customerPhone,
+    
+    location: customerLocation,
+    
+    gallons: customerGallons,
+    
+    price: Number(customerPrice),
+    
+    payment: customerPayment,
+    
+    status: 'بالطريق'
+    
+  });
+  
+  save();
+  
+  render();
+  
+  /* تفريغ الحقول */
+  
+  document.getElementById("name").value = "";
+  
+  document.getElementById("phone").value = "";
+  
+  document.getElementById("location").value = "";
+  
+  document.getElementById("gallons").value = "";
+  
+  document.getElementById("price").value = "";
+  
+  alert("تم إضافة الطلب بنجاح");
+  
+}
+
+/* الوضع الداكن */
+
+function toggleDark(){
+
+document.body.classList.toggle("light");
+
+document.getElementById("darkToggle")
+.classList.toggle("active");
+
+}
+
+/* فتح الدليل */
+
+function opener(){
+
+window.location.href =
+"Application-Guide.html";
+
+}
+
+/* حذف البيانات */
+
+function clearData(){
+
+if(confirm("هل تريد حذف جميع البيانات؟")){
+
+localStorage.clear();
+
+orders=[];
+
+render();
+
+alert("تم حذف البيانات");
+
+}
+
+}
+
+/* حذف المؤقت */
+
+function clearTemp(){
+
+sessionStorage.clear();
+
+alert("تم حذف البيانات المؤقتة");
+
+}
+
+/* عرض البيانات */
+
+function render(){
+
+let total = orders.reduce(
+(a,b)=>a+b.price,
+0
+);
+
+let clients = [
+...new Set(
+orders.map(o=>o.name)
+)
+];
+
+/* الإحصائيات */
+
+ordersCount.innerText =
+orders.length;
+
+profits.innerText =
+total + " ر.س";
+
+clients.innerText =
+clients.length;
+
+/* الطلبات */
+
+ordersList.innerHTML =
+orders.map((o,i)=>`
+
+<div class="order">
+
+<b>${o.name}</b><br><br>
+
+📞 ${o.phone}<br>
+
+📍 ${o.location}<br>
+
+🚰 ${o.gallons} جالون<br>
+
+💰 ${o.price} ر.س<br>
+
+💳 ${o.payment}<br>
+
+<div class="actions">
+
+<button class="done"
+onclick="
+orders[${i}].status='تم';
+save();
+render();
+">
+✔
+</button>
+
+<button class="delete"
+onclick="
+orders.splice(${i},1);
+save();
+render();
+">
+🗑
+</button>
+
+</div>
+
+</div>
+
+`).join('');
+
+/* العملاء */
+
+clientsList.innerHTML =
+clients.map(c=>`
+
+<div class="order">
+👤 ${c}
+</div>
+
+`).join('');
+
+/* الأرباح */
+
+profitsBig.innerHTML = `
+
+<h1 style="
+font-size:45px;
+color:#38bdf8;
+margin-top:15px;
+">
+${total} ر.س
+</h1>
+
+`;
+
+}
+
+render();
+
 </script>
 
 </body>

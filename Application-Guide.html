@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.910">
+
+<title>BLUE WATER VIP ULTRA GUIDE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+
+body{
+background:
+linear-gradient(180deg,#03111f,#071b31,#021526);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* الخلفية */
+
+.bg{
+position:fixed;
+inset:0;
+overflow:hidden;
+z-index:-1;
+}
+
+.bg span{
+position:absolute;
+bottom:-120px;
+border-radius:50%;
+background:rgba(0,183,255,.10);
+animation:float linear infinite;
+backdrop-filter:blur(10px);
+}
+
+@keyframes float{
+0%{
+transform:translateY(0) scale(0);
+opacity:0;
+}
+50%{
+opacity:1;
+}
+100%{
+transform:translateY(-130vh) scale(1.5);
+opacity:0;
+}
+}
+
+/* الحاوية */
+
+.container{
+width:100%;
+max-width:950px;
+margin:auto;
+padding:20px;
+padding-bottom:80px;
+}
+
+/* الهيدر */
+
+.hero{
+background:
+linear-gradient(135deg,
+rgba(56,189,248,.18),
+rgba(255,255,255,.03));
+
+border:1px solid rgba(255,255,255,.08);
+
+padding:35px 25px;
+
+border-radius:30px;
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+margin-top:25px;
+
+text-align:center;
+}
+
+.hero h1{
+font-size:34px;
+font-weight:900;
+color:#7dd3fc;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:16px;
+line-height:2;
+opacity:.9;
+}
+
+/* الكروت */
+
+.card{
+margin-top:22px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.06);
+
+border-radius:26px;
+
+padding:25px;
+
+backdrop-filter:blur(18px);
+
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+background:rgba(255,255,255,.07);
+}
+
+.card h2{
+font-size:24px;
+margin-bottom:18px;
+color:#38bdf8;
+font-weight:900;
+}
+
+.card p{
+line-height:2.1;
+font-size:15px;
+opacity:.93;
+}
+
+.card ul{
+margin-top:15px;
+padding-right:18px;
+}
+
+.card li{
+margin-bottom:12px;
+line-height:1.9;
+font-size:15px;
+}
+
+/* الفوتر */
+
+.footer{
+margin-top:35px;
+text-align:center;
+padding:25px;
+opacity:.8;
+font-size:14px;
+}
+
+/* متجاوب للجوال */
+
+@media(max-width:700px){
+
+.hero{
+padding:28px 18px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:26px;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.card{
+padding:20px;
+border-radius:22px;
+}
+
+.card h2{
+font-size:20px;
+}
+
+.card p,
+.card li{
+font-size:14px;
+}
+
+}
+
+/* شريط علوي */
+
+.top-bar{
+position:sticky;
+top:0;
+z-index:999;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(20px);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+padding:18px 20px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:18px;
+font-weight:900;
+color:#38bdf8;
+}
+
+.vip{
+background:linear-gradient(45deg,#38bdf8,#0ea5e9);
+padding:8px 16px;
+border-radius:40px;
+font-size:12px;
+font-weight:bold;
+}
+
+/* سكرول ناعم */
+
+html{
+scroll-behavior:smooth;
+}
+.back-btn {
+  background: linear-gradient(45deg, #0ea5e9, #38bdf8);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 12px;
+  transition: .3s;
+  box-shadow: 0 8px 20px rgba(56, 189, 248, .25);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, .35);
+}
+
+.back-btn:active {
+  transform: scale(.95);
+}
+</style>
+</head>
+
+<body>
+
+<!-- الخلفية -->
+
+<div class="bg">
+
+<span style="left:10%;width:18px;height:18px;animation-duration:14s"></span>
+
+<span style="left:30%;width:35px;height:35px;animation-duration:18s"></span>
+
+<span style="left:55%;width:22px;height:22px;animation-duration:12s"></span>
+
+<span style="left:80%;width:40px;height:40px;animation-duration:20s"></span>
+
+</div>
+
+<!-- الشريط العلوي -->
+
+<div class="top-bar">
+  
+  <!-- زر الرجوع -->
+  <button onclick="goHome()" style="
+background:linear-gradient(45deg,#0ea5e9,#38bdf8);
+border:none;
+padding:8px 14px;
+border-radius:12px;
+color:white;
+font-weight:900;
+cursor:pointer;
+font-size:12px;
+">
+    🔙 رجوع
+  </button>
+  
+  <div class="logo">
+    💧 BLUE WATER VIP ULTRA
+  </div>
+  
+  <div class="vip">
+    VIP GUIDE
+  </div>
+  
+</div>
+
+<!-- المحتوى -->
+
+<div class="container">
+
+<!-- المقدمة -->
+
+<div class="hero">
+
+<h1>
+💧 دليل تطبيق BLUE WATER VIP ULTRA 
+</h1>
+
+<p>
+نظام احترافي لإدارة طلبات المياه وتتبع العملاء والأرباح
+بواجهة VIP حديثة وسريعة ومتوافقة مع جميع الأجهزة.
+</p>
+
+</div>
+
+<!-- الرئيسية -->
+
+<div class="card">
+
+<h2>🏠 الصفحة الرئيسية</h2>
+
+<p>
+تعرض الصفحة الرئيسية جميع الإحصائيات المهمة مثل عدد الطلبات،
+الأرباح، والعملاء بشكل مباشر وفوري.
+</p>
+
+<ul>
+<li>📦 عدد الطلبات</li>
+<li>💰 إجمالي الأرباح</li>
+<li>👥 عدد العملاء</li>
+<li>📊 تحديث مباشر للبيانات</li>
+</ul>
+
+</div>
+
+<!-- الطلبات -->
+
+<div class="card">
+
+<h2>📦 قسم الطلبات</h2>
+
+<p>
+قسم مخصص لإدارة جميع الطلبات اليومية بطريقة منظمة وسريعة.
+</p>
+
+<ul>
+<li>إضافة طلب جديد</li>
+<li>عرض بيانات العميل</li>
+<li>متابعة حالة الطلب</li>
+<li>حذف الطلبات المكتملة</li>
+</ul>
+
+</div>
+
+<!-- العملاء -->
+
+<div class="card">
+
+<h2>👥 العملاء</h2>
+
+<p>
+يعرض جميع العملاء المسجلين داخل النظام مع تنظيم تلقائي للأسماء.
+</p>
+
+</div>
+
+<!-- الأرباح -->
+
+<div class="card">
+
+<h2>💰 الأرباح</h2>
+
+<p>
+يقوم النظام بحساب الأرباح تلقائيًا وعرض المجموع الكامل بشكل مباشر.
+</p>
+
+</div>
+
+<!-- الإعدادات -->
+
+<div class="card">
+
+<h2>⚙️ الإعدادات</h2>
+
+<ul>
+<li>🌙 الوضع الداكن</li>
+<li>🗑️ حذف البيانات</li>
+<li>🧹 تنظيف البيانات المؤقتة</li>
+<li>📱 معلومات النظام</li>
+</ul>
+
+</div>
+
+<!-- الحفظ -->
+
+<div class="card">
+
+<h2>💾 حفظ البيانات</h2>
+
+<p>
+يعتمد التطبيق على Local Storage لحفظ البيانات داخل الجهاز
+بدون الحاجة إلى إنترنت أو قواعد بيانات خارجية.
+</p>
+
+</div>
+
+<!-- المميزات -->
+
+<div class="card">
+
+<h2>🚀 مميزات النظام</h2>
+
+<ul>
+<li>واجهة VIP احترافية</li>
+<li>تصميم متجاوب للجوال</li>
+<li>سرعة وأداء عالي</li>
+<li>تأثيرات بصرية حديثة</li>
+<li>حفظ تلقائي للبيانات</li>
+<li>سهولة الاستخدام</li>
+</ul>
+
+</div>
+
+<!-- النهاية -->
+
+<div class="footer">
+
+💎 BLUE WATER VIP ULTRA © 2026
+
+</div>
+
+</div>
+
+<script>
+function goHome() {
+  window.location.href = "index.html";
+}
+console.log("BLUE WATER VIP ULTRA GUIDE READY");
+
+</script>
+
+</body>
+</html>
